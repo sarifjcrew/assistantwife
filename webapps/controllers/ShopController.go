@@ -16,26 +16,6 @@ type Result struct {
 }
 type ShopController struct{}
 
-func (c *ShopController) Save(w http.ResponseWriter, r *http.Request) {
-	reqBody, _ := ioutil.ReadAll(r.Body)
-
-	defer r.Body.Close()
-	br := bytes.NewReader(reqBody)
-	decoder := json.NewDecoder(br)
-
-	shopM := models.ShopModel{}
-	_ = decoder.Decode(&shopM)
-
-	repo := repositories.ShopRepo{}
-	repo.Save(&shopM)
-
-	result, _ := json.Marshal(shopM)
-
-	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(http.StatusCreated)
-	w.Write(result)
-}
-
 func (c *ShopController) Get(w http.ResponseWriter, r *http.Request) {
 	repo := repositories.ShopRepo{}
 	service := services.ShopService{}
@@ -50,6 +30,28 @@ func (c *ShopController) Get(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusCreated)
 	w.Write(result1)
+}
+
+func (c *ShopController) Save(w http.ResponseWriter, r *http.Request) {
+	reqBody, _ := ioutil.ReadAll(r.Body)
+
+	defer r.Body.Close()
+	br := bytes.NewReader(reqBody)
+	decoder := json.NewDecoder(br)
+
+	shopM := models.ShopModel{}
+	_ = decoder.Decode(&shopM)
+
+	repo := repositories.ShopRepo{}
+	service := services.ShopService{}
+
+	service.Save(&shopM, repo)
+
+	result, _ := json.Marshal(shopM)
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusCreated)
+	w.Write(result)
 }
 
 func (c *ShopController) Delete(w http.ResponseWriter, r *http.Request) {

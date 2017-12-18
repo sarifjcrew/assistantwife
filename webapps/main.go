@@ -42,7 +42,15 @@ func debt(w http.ResponseWriter, r *http.Request) {
 	templateBase := baseTemplate
 	templateBase = append(templateBase, "views/Debt/index.html")
 
-	log.Println(templateBase)
+	templates["debt"] = template.Must(template.ParseFiles(templateBase...))
+
+	renderTemplate(w, "debt", "base", nil)
+}
+
+func saldo(w http.ResponseWriter, r *http.Request) {
+	templateBase := baseTemplate
+	templateBase = append(templateBase, "views/Saldo/index.html")
+
 	templates["debt"] = template.Must(template.ParseFiles(templateBase...))
 
 	renderTemplate(w, "debt", "base", nil)
@@ -57,6 +65,8 @@ func main() {
 	mux.Handle("/assets/", fs)
 
 	shopC := controllers.ShopController{}
+	debtC := controllers.DebtController{}
+	saldoC := controllers.SaldoController{}
 
 	mux.HandleFunc("/", index)
 	mux.HandleFunc("/shop/get", shopC.Get)
@@ -64,6 +74,13 @@ func main() {
 	mux.HandleFunc("/shop/delete", shopC.Delete)
 
 	mux.HandleFunc("/debt", debt)
+	mux.HandleFunc("/debt/get", debtC.Get)
+	mux.HandleFunc("/debt/save", debtC.Save)
+	mux.HandleFunc("/debt/delete", debtC.Delete)
+
+	mux.HandleFunc("/saldo", saldo)
+	mux.HandleFunc("/saldo/get", saldoC.Get)
+	mux.HandleFunc("/saldo/save", saldoC.Save)
 
 	server := &http.Server{
 		Addr:    ":8022",

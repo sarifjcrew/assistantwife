@@ -3,6 +3,7 @@
 {{end}}
 
 {{define "head"}}
+<link rel="stylesheet" type="text/css" href="/assets/core/css/debt.css">
 <script src="/assets/core/js/debt.js"></script>
 {{end}}
 
@@ -19,7 +20,7 @@
 			<div class="form-group">
 				<label for="keterangan" class="col-sm-2 control-label">Keterangan</label>
 				<div class="col-sm-10">
-					<textarea class="form-control" id="keterangan" data-bind="value: DebtModel.Model.data.Ket" placeholder="keterangan"></textarea>
+					<textarea class="form-control" id="keterangan" data-bind="value: DebtModel.Model.data.Keterangan" placeholder="keterangan"></textarea>
 				</div>
 			</div>
 			<div class="form-group">
@@ -41,26 +42,31 @@
 		</form>
 	</div>
 </div>
-<!-- <div class="row">
+<div class="row">
 	<div class="col-md-12">
 		<table class="table">
 			<thead>
 				<tr>
 					<th>Tanggal</th>
 					<th>Keterangan</th>
-					<th>Harga</th>
+					<th>Debt</th>
 					<th>Action</th>					
 				</tr>
 			</thead>
-			<tbody data-bind="foreach: IndexModel.dataAttr.shopList">
+			<tbody data-bind="foreach: DebtModel.Model.debtList">
 				<tr>
 					<td data-bind="text: Toolkit.convertDate($data.Tanggal)"></td>
 					<td data-bind="text: Keterangan"></td>
-					<td data-bind="text: Harga"></td>
-					<td><button class="btn btn-info" data-bind="click: IndexModel.editShop($index())"><i class="fa fa-edit"></i></button><button class="btn btn-danger" data-bind="click: IndexModel.deleteShop($data.Id)"><i class="fa fa-trash"></i></button></td>
+					<td class="numberright" data-bind="text: Debt"></td>
+					<td><button class="btn btn-info" data-bind="click: DebtModel.editDebt($index())"><i class="fa fa-edit"></i></button><button class="btn btn-danger" data-bind="click: DebtModel.deleteDebt($data.Id)"><i class="fa fa-trash"></i></button></td>
 				</tr>
 			</tbody>
 		</table>
 	</div>
-</div> -->
+</div>
+<div class="row">
+<div class="col-md-12">
+	Total Hutang : <span data-bind="text: DebtModel.Model.Attr.TotalHutang"></span>
+</div>
+</div>
 {{end}}

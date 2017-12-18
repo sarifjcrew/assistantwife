@@ -1,0 +1,39 @@
+{{define "title"}}
+	Saldo
+{{end}}
+
+{{define "head"}}
+<script src="/assets/core/js/saldo.js"></script>
+{{end}}
+
+{{define "content"}}
+<div class="row">
+	<div class="col-md-12">
+		<form class="form-horizontal">
+			<div class="form-group">
+				<label for="harga" class="col-sm-2 control-label">Saldo</label>
+				<div class="col-sm-10 hargabox">
+					<div class="col-sm-1">
+						<span>Rp.</span>
+					</div>
+					<div class="col-sm-11 nopadding">
+						<input type="number" class="form-control" id="harga" data-bind="value: SaldoModel.Model.Attr.saldo" placeholder="Saldo">
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-12">
+					<input type="submit" class="btn btn-primary col-sm-12" value="masukan" data-bind="click: SaldoModel.Save">
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-12">
+		Total Saldo : <span data-bind="text: SaldoModel.Model.data.Saldo"></span>
+		<button data-bind="click: SaldoModel.Edit">Edit</button>
+	</div>
+
+</div>
+{{end}}

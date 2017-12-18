@@ -6,10 +6,10 @@ import (
 	"pribadi/assistantwife/webapps/models"
 )
 
-type DebtRepo struct {
+type SaldoRepo struct {
 }
 
-func (r DebtRepo) Save(data interface{}) error {
+func (r SaldoRepo) Save(data interface{}) error {
 	session, err := mgo.Dial("localhost:27017")
 	if err != nil {
 		panic(err)
@@ -18,9 +18,9 @@ func (r DebtRepo) Save(data interface{}) error {
 	defer session.Close()
 
 	session.SetMode(mgo.Monotonic, true)
-	c := session.DB("AssistantWife").C("Debt")
+	c := session.DB("AssistantWife").C("Saldo")
 
-	model := data.(*models.DebtModel)
+	model := data.(*models.SaldoModel)
 
 	if model.Id == "" {
 		model.Id = bson.NewObjectId()
@@ -34,29 +34,29 @@ func (r DebtRepo) Save(data interface{}) error {
 	return err
 }
 
-func (r DebtRepo) Get() (interface{}, error) {
+func (r SaldoRepo) Get() (interface{}, error) {
 	session, err := mgo.Dial("localhost:27017")
 	if err != nil {
 		panic(err)
 	}
 
 	session.SetMode(mgo.Monotonic, true)
-	c := session.DB("AssistantWife").C("Debt")
+	c := session.DB("AssistantWife").C("Saldo")
 
-	result := []models.DebtModel{}
+	result := []models.SaldoModel{}
 	err = c.Find(bson.M{}).All(&result)
 
 	return result, err
 }
 
-func (r DebtRepo) DeleteById(id interface{}) error {
+func (r SaldoRepo) DeleteById(id interface{}) error {
 	session, err := mgo.Dial("localhost:27017")
 	if err != nil {
 		panic(err)
 	}
 
 	session.SetMode(mgo.Monotonic, true)
-	c := session.DB("AssistantWife").C("Debt")
+	c := session.DB("AssistantWife").C("Saldo")
 
 	idObj := id.(string)
 	err = c.RemoveId(bson.ObjectIdHex(idObj))
