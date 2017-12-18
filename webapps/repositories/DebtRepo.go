@@ -6,10 +6,10 @@ import (
 	"pribadi/assistantwife/webapps/models"
 )
 
-type ShopRepo struct {
+type DebtRepo struct {
 }
 
-func (r *ShopRepo) Save(data interface{}) error {
+func (r *DebtRepo) Save(data interface{}) error {
 	session, err := mgo.Dial("localhost:27017")
 	if err != nil {
 		panic(err)
@@ -34,7 +34,7 @@ func (r *ShopRepo) Save(data interface{}) error {
 	return err
 }
 
-func (r ShopRepo) Get() (interface{}, error) {
+func (r DebtRepo) Get() (interface{}, error) {
 	session, err := mgo.Dial("localhost:27017")
 	if err != nil {
 		panic(err)
@@ -49,7 +49,7 @@ func (r ShopRepo) Get() (interface{}, error) {
 	return result, err
 }
 
-func (r ShopRepo) DeleteById(id interface{}) error {
+func (r DebtRepo) DeleteById(id interface{}) error {
 	session, err := mgo.Dial("localhost:27017")
 	if err != nil {
 		panic(err)

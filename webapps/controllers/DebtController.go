@@ -4,12 +4,13 @@ import (
 	"bytes"
 	"encoding/json"
 	"io/ioutil"
+	"net/http"
 	"pribadi/assistantwife/webapps/models"
 )
 
 type DebtController struct{}
 
-func (c *DebtController) Save(w http.ResponseWritter, r *http.Request) {
+func (c *DebtController) Save(w http.ResponseWriter, r *http.Request) {
 	reqBody, _ := ioutil.ReadAll(r.Body)
 
 	defer r.Body.Close()

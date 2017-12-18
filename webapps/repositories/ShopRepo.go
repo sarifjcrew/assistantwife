@@ -9,7 +9,7 @@ import (
 type ShopRepo struct {
 }
 
-func (r *ShopRepo) Save(data interface{}) {
+func (r ShopRepo) Save(data interface{}) error {
 	session, err := mgo.Dial("localhost:27017")
 	if err != nil {
 		panic(err)
@@ -30,6 +30,8 @@ func (r *ShopRepo) Save(data interface{}) {
 	if err != nil {
 		panic(err)
 	}
+
+	return err
 }
 
 func (r ShopRepo) Get() (interface{}, error) {
