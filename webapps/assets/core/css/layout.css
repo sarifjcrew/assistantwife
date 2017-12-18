@@ -1,0 +1,15 @@
+#container {
+	margin: 0 30%;
+}
+
+.hargabox {
+	padding: 0;
+}
+
+.hargabox span,input {
+	display: inline;
+}
+
+.hargabox div:first-child {
+	padding-top: 5px;
+}
